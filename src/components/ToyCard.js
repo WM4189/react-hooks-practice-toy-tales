@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 
 function ToyCard({onUpdate, toy, onDelete}) {
-  const {name, image, id, likes} = toy
-  const [increaseLikes, setLikes] = useState(likes)
+  const {name, image, id} = toy
+  // const [increaseLikes, setLikes] = useState(likes)
   
 
   function handleDelete(){
@@ -13,7 +13,8 @@ function ToyCard({onUpdate, toy, onDelete}) {
   }
 
 function handleUpdate(){
-  setLikes(increaseLikes+1)
+  const increaseLikes = ++toy.likes
+  // setLikes(increaseLikes => increaseLikes+1)
   const likesObj = {likes:increaseLikes}
   fetch(`http://localhost:3001/toys/${id}`,{
     method:"PATCH",
@@ -34,7 +35,7 @@ function handleUpdate(){
         alt={name}
         className="toy-avatar"
       />
-      <p>{likes} Likes </p>
+      <p>{toy.likes} Likes </p>
       <button onClick={handleUpdate} className="like-btn">Like {"<3"}</button>
       <button onClick={handleDelete} className="del-btn">Donate to GoodWill</button>
     </div>
